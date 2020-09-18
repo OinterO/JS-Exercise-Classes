@@ -59,15 +59,19 @@ class Person {
  constructor(name, age, stomach){
 this.name= name;
 this.age = age;
-this.stomach = stomach;
+this.stomach = [];
 }
 eat(food){
   if (this.stomach.length < 10){
     this.stomach.push(food)
   }
-  Person.prototype.poop = function (){
-    this.stomach = [];
-  }
+  
+}
+poop(){
+this.stomach = []
+}
+toString(){
+  return ` ${this.name} and ${this.age}`
 }
 }
 const guy = new Person({
@@ -92,9 +96,26 @@ class Car {
   constructor(attributes){
     this.model = attributes.model;
     this.milesPerGallon = attributes.milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
     }
-
+    drive(distance) {
+      if (this.tank > (distance/this.milesPerGallon)){
+        this.odometer += distance;
+        this.tank -= (distance/this.milesPerGallon);
+      }
+      else if (this.tank <= (distance/this.milesPerGallon)){
+        this.odometer = this.odometer + (this.tank * this.milesPerGallon);
+        this.tank -= this.tank;
+        return  (`I ran out of fuel at ${this.odometer} miles!`)
+      }
+    }
+    fill(gallons) {
+      return this.tank += gallons;
+    }
   }
+  
+  
 
 /*
   TASK 3
@@ -114,6 +135,10 @@ class Lambdasian {
     this.age = attributes.age;
     this.location = attributes.location;
 
+}
+speak() {
+return `Hello My name is ${this.name}, I am from ${this.location}`}
+ 
 }
 
 /*
@@ -138,6 +163,12 @@ class Instructor extends Lambdasian {
     this.catchPhrase = attributes.catchPhrase;
 
 }
+demo() {
+return `Today we are learning about ${subject}`}
+grade() {
+  return `${student.name} receives a perfect score on {subject}`
+}
+
 }
 
 /*
@@ -162,6 +193,25 @@ class Student extends Lambdasian {
     this.className = attributes.className;
     this.favSubjects = attributes.favSubjects;
 }
+listSubjects(){
+  return `Loving ${this.favSubjects.toString}`
+}
+PRAssignment(){
+  return `${this.name} has submitted a PR for ${this.favSubjects}`
+}
+sprintChallenge(){
+  return `${this.name} has begun sprint challenge on ${this.favSubjects}`
+}
+}
+const StudentOne = new Student({
+  name: 'Joma',
+  age: 19,
+  location: 'Boston',
+  previousBackground: 'Sales',
+  className: 'web36',
+  favSubjects: ['HTML', 'CSS', 'JS']
+});
+
 
 /*
   TASK 6
@@ -182,6 +232,13 @@ class ProjectManager extends Instructor {
     this.gradClassName = attributes.gradClassName;
     this.favInstructor = attributes.favInstructor;
 }
+standUp() {
+ return `${name} announces to ${channel}, @channel standy times!`
+}
+debugsCode() {
+  return `${name} debugs ${student.name}'s code on ${subject}}
+}
+
 
 
 
